@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import BookList from "./components/BookList";
+import ApolloClient, { InMemoryCache } from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
+import AddBook from "./components/AddBook";
+
+export const client = new ApolloClient({
+	uri: "https://tanmaysgraphqlserver.herokuapp.com/graphql",
+});
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<ApolloProvider client={client}>
+			<div className="App">
+				<BookList />
+				<AddBook />
+			</div>
+		</ApolloProvider>
+	);
 }
 
 export default App;
